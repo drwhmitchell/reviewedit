@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>DeepSleep Solutions Review Writer Tool</title>
+	  
+     <!-- CSS for Bootstrap -->
+	  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+    <!-- Include Quill stylesheet -->
+    <link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet">   
+    <link href="reviewedit.css" rel="stylesheet">   
+
+  </head>
+
+  <body onload="initializePage()">
+    <main>
+
+    <h1>DeepSleep Solution Review Editor</h1>
+
+    <div class="control-container">
+      <div class="control-box">
+        <input type="checkbox" id="showHTML" name="showHTML" value="HTML" onchange="ShowHTMLCheck()" checked></input>
+        <label for="showHTML" class="bold-label">Show HTML</label>
+      </div>
+
+      <label for="file-upload" class="custom-file-upload">Load File</label>
+      <input id="file-upload" type="file" accept=".htm, .html" onchange="FileInput()">
+      <button type="button" class="review-button" onclick="SaveToLocalFile()">Download</button>
+      <button type="button" class="review-button" onclick="PreviewReview()">Preview Review</button>
+      <button type="button" class="review-button" onclick="SubmitReview()">Submit Review</button>
+    </div>
+    <br>
+
+    <div class="title-container">
+        <div style="width: 95%; padding-bottom: 1.5em;">
+          <h4>Review Title </h4><input id="review-title" style="width: 75%;"></input>
+        </div>
+    </div>
+
+
+    <div class="review-content-container">
+        <div id="editor-meta-container">
+          <div id="editor-container" oninput="ShowHTML()">
+          </div>
+        </div>
+    </div>
+
+
+    <hr id="resize-widget" ondrag="ResizeReviewWindow()">
+
+    
+    <div class="review-content-container">
+        <div id="html-container">
+          <textarea id="html-editor" oninput="SaveHTML()"></textarea>
+        </div>
+    </div>
+    
+
+    </main>
+
+  <!-- Include the Quill library -->
+  <script src="https://cdn.quilljs.com/1.0.0/quill.js"></script>
+  <!-- Include reviewEdit code -->
+  <script src="reviewedit.js"></script>
+
+  </script> 
+
+    <!-- JavaScript Bundle with Popper  -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+  </body> 
+</html>
