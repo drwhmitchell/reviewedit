@@ -27,9 +27,27 @@ var quill = new Quill('#editor-container', {
 
 // Submit review to the server
 function SubmitReview() {
-  var reviewText = quill.root.innerHTML;
-  console.log("Review Title: " + document.getElementById("review-title").value);
-  console.log("Review Content: " + JSON.stringify(reviewText));
+
+  var reviewObj = new Object();
+
+  // Get review in variables
+  reviewObj.title = document.getElementById("review-title").value;
+  reviewObj.category = document.getElementById("category-select").value;
+  reviewObj.author  = document.getElementById("review-author").value;
+  reviewObj.date = document.getElementById("review-date").value;
+  reviewObj.summary = document.getElementById("review-summary").value;
+  reviewObj.heroImage = document.getElementById("review-hero-image-url").value;
+  reviewObj.rating = document.getElementById("review-rating-text").value;
+  reviewObj.score = document.getElementById("review-score-select").value;
+  reviewObj.deep = document.getElementById("review-efficacy-deep").value;
+  reviewObj.rem = document.getElementById("review-efficacy-rem").value;
+  reviewObj.onset = document.getElementById("review-efficacy-onset").value;
+  reviewObj.efficiency = document.getElementById("review-efficacy-efficiency").value;
+  reviewObj.wakefulness = document.getElementById("review-efficacy-wakefulness").value;
+  reviewObj.body = quill.root.innerHTML;
+
+  console.log('REVIEW OBJ=' + JSON.stringify(reviewObj));
+
 }
 
 // Displays review in another window with the styling and frame of our website
