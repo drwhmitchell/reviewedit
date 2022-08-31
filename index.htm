@@ -27,7 +27,7 @@
       </div>
 
       <label for="file-upload" class="custom-file-upload">Load File</label>
-      <input id="file-upload" type="file" accept=".htm, .html" onchange="FileInput()">
+      <input id="file-upload" type="file" accept=".rvw" onchange="FileInput()">
       <button type="button" class="review-button" onclick="SaveToLocalFile()">Download</button>
       <button type="button" class="review-button" onclick="PreviewReview()">Preview Review</button>
       <button type="button" class="review-button" onclick="SubmitReview()">Submit Review</button>
@@ -112,6 +112,11 @@
         <h4><label for="review-efficacy-wakefulness">Wakefulness Efficacy:</label></h4>
         <input name="review-efficacy-wakefulness" type="range" min="0" max="100" value="50" class="slider" id="review-efficacy-wakefulness" style="width: 50%;">
      </div>
+
+     <div class="field-container">
+      <h4><label for="review-efficacy-accuracy">Accuracy Efficacy:</label></h4>
+      <input name="review-efficacy-accuracy" type="range" min="0" max="100" value="50" class="slider" id="review-efficacy-accuracy" style="width: 50%;">
+   </div>
 
       <div class="field-container">
         <label for="review-vendorname-1"><h4>Vendor:&nbsp&nbsp&nbsp</h4></label>

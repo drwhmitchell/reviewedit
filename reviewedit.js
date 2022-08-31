@@ -25,9 +25,7 @@ var quill = new Quill('#editor-container', {
   theme: 'snow'
 });
 
-// Submit review to the server
-function SubmitReview() {
-
+function SerializeReviewObject() {
   var reviewObj = new Object();
 
   // Get review in variables
@@ -44,10 +42,54 @@ function SubmitReview() {
   reviewObj.onset = document.getElementById("review-efficacy-onset").value;
   reviewObj.efficiency = document.getElementById("review-efficacy-efficiency").value;
   reviewObj.wakefulness = document.getElementById("review-efficacy-wakefulness").value;
+  reviewObj.accuracy = document.getElementById("review-efficacy-accuracy").value;
+  reviewObj.vendorName1 = document.getElementById("review-vendorname-1").value;
+  reviewObj.vendorLink1 = document.getElementById("review-link-1").value;
+  reviewObj.vendorPrice1 = document.getElementById("review-price-1").value;
+  reviewObj.vendorName2 = document.getElementById("review-vendorname-2").value;
+  reviewObj.vendorLink2 = document.getElementById("review-link-2").value;
+  reviewObj.vendorPrice2 = document.getElementById("review-price-2").value;
   reviewObj.body = quill.root.innerHTML;
 
-  console.log('REVIEW OBJ=' + JSON.stringify(reviewObj));
+  return(JSON.stringify(reviewObj));
+}
 
+function InstantiateReviewObject(serializedObj) {
+  var reviewObj = new Object(JSON.parse(serializedObj));
+
+  // Get review in variables
+  document.getElementById("review-title").value = reviewObj.title;
+
+  document.getElementById("category-select").value = reviewObj.category;
+  document.getElementById("review-author").value = reviewObj.author;
+  document.getElementById("review-date").value = reviewObj.date;
+  document.getElementById("review-summary").value = reviewObj.summary;
+  document.getElementById("review-hero-image-url").value = reviewObj.heroImage;
+  document.getElementById("review-rating-text").value = reviewObj.rating;
+  document.getElementById("review-score-select").value = reviewObj.score;
+  document.getElementById("review-efficacy-deep").value = reviewObj.deep;
+  document.getElementById("review-efficacy-rem").value = reviewObj.rem;
+  document.getElementById("review-efficacy-onset").value = reviewObj.onset;
+  document.getElementById("review-efficacy-efficiency").value = reviewObj.efficiency;
+  document.getElementById("review-efficacy-wakefulness").value = reviewObj.wakefulness;
+  document.getElementById("review-efficacy-accuracy").value = reviewObj.accuracy;
+  document.getElementById("review-vendorname-1").value = reviewObj.vendorName1;
+  document.getElementById("review-link-1").value = reviewObj.vendorLink1;
+  document.getElementById("review-price-1").value = reviewObj.vendorPrice1;
+  document.getElementById("review-vendorname-2").value = reviewObj.vendorName2;
+  document.getElementById("review-link-2").value = reviewObj.vendorLink2;
+  document.getElementById("review-price-2").value = reviewObj.vendorPrice2;
+  quill.root.innerHTML = reviewObj.body;
+
+}
+
+
+// Submit review to the server
+function SubmitReview() {
+
+  var reviewObj = SerializeReviewObject();
+
+  console.log('SUBMITTING REVIEW OBJ=' + JSON.stringify(reviewObj));
 }
 
 // Displays review in another window with the styling and frame of our website
@@ -72,10 +114,12 @@ function initializePage() {
 }
 
 function SaveToLocalFile() {
-  var fileContent = quill.root.innerHTML;
+//  var fileContent = quill.root.innerHTML;
+  var fileContent = SerializeReviewObject();
+
   var bb = new Blob([fileContent ], { type: 'text/plain' });
   var a = document.createElement('a');
-  a.download = 'download.html';
+  a.download = 'download.rvw';
   a.href = window.URL.createObjectURL(bb);
   a.click();
   a.remove();
@@ -112,13 +156,16 @@ var fr=new FileReader();
 fr.onload=function() {
   // when file is loaded, load it into Quill
   if (fr.result) {
+    InstantiateReviewObject(fr.result);
+/*    
     // Load data into Quill
     quill.root.innerHTML =fr.result;
     // Load HTML into text editor
     document.getElementById('html-editor').value = quill.root.innerHTML;
     // Populate Title if there is a <Title> tag...
     PopulateTitle(document.getElementById("review-title"), fr.result);
-  }
+  */
+   }
 }           
 // Start reading file asynchronously
 fr.readAsText(fn);
