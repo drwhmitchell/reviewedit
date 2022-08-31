@@ -1,12 +1,10 @@
-/*
-main {
-    height: 100vh;
-    overflow-y: auto;
-}
 
-*/
 input[type="file"] {
     display: none;
+}
+
+h4 {
+    width:25%;
 }
 
 .bold-label {
@@ -72,35 +70,6 @@ a:link {
     margin-right:0em;
 }
 
-.review-button {
-    margin-top: 2em; 
-    margin-left:0.5em; 
-    margin-right:0.5em;
-    width: 8em;
-    background-color: #d3d3d3b4;
-}
-/*
- button {
-    margin-top: 2em; 
-    margin-left:1em; 
-    margin-right:1em;
-    width: 8em;
-*/
-    /*
-    color: #ffffffd4;
-    background-color: #3656889b;
-    font-family: Nunito, sans-serif;
-    font-size: 3em;
-    text-align: center;
-    padding-left: 2em;
-    padding-right: 2em;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    width: 50%;               
-
-}
-*/
-
 .control-container {
     display: flex;  
     align-items: center; 
@@ -109,18 +78,26 @@ a:link {
 
 .control-box {
     margin-top: 2.5em; 
-    margin-left:1em; 
-    margin-right:2em;
+    margin-left:5%; 
+    margin-right:5%;
 }
 
-.title-container {
+.field-container {
+    margin-left: 5%; 
+    margin-right: 5%; 
+    margin-bottom: 0.5em;
+
     display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center;
+    align-items: left; 
+    justify-content: left;
 }
 
-.review-content-container {
+.review-container {
+
+}
+
+
+.review-body-container {
     display: flex; 
     flex-direction: column; 
     align-items: center; 

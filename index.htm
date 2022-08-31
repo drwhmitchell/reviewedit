@@ -34,28 +34,123 @@
     </div>
     <br>
 
-    <div class="title-container">
-        <div style="width: 95%; padding-bottom: 1.5em;">
-          <h4>Review Title </h4><input id="review-title" style="width: 75%;"></input>
-        </div>
-    </div>
+    <div class="review-container">
+
+      <div class="field-container">
+        <h4>Title:</h4><input id="review-title" style="width: 75%;"></input>
+      </div>
+
+      <div class="field-container">
+        <h4><label for="category-select">Category:&nbsp</label></h4>
+        <select name="category-select" id="category-select">
+          <option value="">-none-</option>
+          <option value="Bedding">Bedding</option>
+          <option value="Supplements">Supplements</option>
+          <option value="Technology">Technology</option>
+          <option value="Audio">Audio</option>
+          <option value="Visual">Visual</option>
+          <option value="Thermals">Thermals</option>
+        </select>
+      </div>
+
+      <div class="field-container">
+        <h4>Author:</h4><input id="review-author" style="width: 50%;"></input>
+      </div>
+
+      <div class="field-container">
+        <h4><label for="review-date">Date:&nbsp</label></h4>
+        <input type="date" id="review-date" name="review-date" value="2022-10-31">
+      </div>
+
+      <div class="field-container">
+        <h4>Summary:</h4><textarea id="review-summary" style="width: 75%;"></textarea>
+      </div>
+
+      <div class="field-container">
+        <h4>Hero Image:</h4><img src="default.jpg" id="review-hero-image" style="width: 150px; border: 1px solid #0f0f0fc3;">
+        <h4>&nbspLink:</h4><input id="review-hero-image" style="width: 30%;"></input>
+      </div>
+
+      <div class="field-container">
+        <h4>Rating:</h4><textarea id="review-rating-text" style="width: 75%;"></textarea>
+      </div>
+
+      <div class="field-container">
+        <h4><label for="category-select">Score:</label></h4>
+        <select name="rating-select" id="rating-select">
+          <option value="">-none-</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+
+      <div class="field-container">
+        <h4><label for="review-efficacy-deep">Deep Efficacy:</label></h4>
+        <input name="review-efficacy-deep" type="range" min="0" max="100" value="50" class="slider" id="review-efficacy-deep" style="width: 50%;">
+      </div>
+
+      <div class="field-container">
+        <h4><label for="review-efficacy-rem">REM Efficacy:</label></h4>
+        <input name="review-efficacy-rem" type="range" min="0" max="100" value="50" class="slider" id="review-efficacy-rem" style="width: 50%;">
+      </div>
+
+      <div class="field-container">
+        <h4><label for="review-efficacy-onset">Onset Efficacy:</label></h4>
+        <input name="review-efficacy-onset" type="range" min="0" max="100" value="50" class="slider" id="review-efficacy-onset" style="width: 50%;">
+      </div>
+
+      <div class="field-container">
+        <h4><label for="review-efficacy-efficiency">Efficiency Efficacy:</label></h4>
+        <input name="review-efficacy-efficiency" type="range" min="0" max="100" value="50" class="slider" id="review-efficacy-efficiency" style="width: 50%;">
+      </div>
 
 
-    <div class="review-content-container">
+      <div class="field-container">
+        <h4><label for="review-efficacy-wakefulness">Wakefulness Efficacy:</label></h4>
+        <input name="review-efficacy-wakefulness" type="range" min="0" max="100" value="50" class="slider" id="review-efficacy-wakefulness" style="width: 50%;">
+     </div>
+
+      <div class="field-container">
+        <label for="review-vendorname-1"><h4>Vendor:&nbsp&nbsp&nbsp</h4></label>
+        <select name="review-vendorname-1" id="review-vendorname-1">
+          <option value="">-none-</option>
+          <option value="Amazon">Amazon</option>
+        </select>
+        <h4>&nbsp&nbsp&nbspLink:</h4><input id="review-link-1" style="width: 30%;"></input>
+        <h4>&nbsp&nbsp&nbspPrice:</h4><input id="review-price-1" style="width: 10%;"></input>
+      </div>
+
+      <div class="field-container">
+        <label for="review-vendorname-2"><h4>Vendor:&nbsp&nbsp&nbsp</h4></label>
+        <select name="review-vendorname-2" id="review-vendorname-2">
+          <option value="">-none-</option>
+          <option value="Amazon">Amazon</option>
+        </select>
+        <h4>&nbsp&nbsp&nbspLink:</h4><input id="review-link-2" style="width: 30%;"></input>
+        <h4>&nbsp&nbsp&nbspPrice:</h4><input id="review-price-2" style="width: 10%;"></input>
+      </div>
+      <br>
+
+
+      <div class="review-body-container">
         <div id="editor-meta-container">
           <div id="editor-container" oninput="ShowHTML()">
           </div>
         </div>
-    </div>
+      </div>
 
 
-    <hr id="resize-widget" ondrag="ResizeReviewWindow()">
+      <hr id="resize-widget" ondrag="ResizeReviewWindow()">
 
     
-    <div class="review-content-container">
+      <div class="review-body-container">
         <div id="html-container">
           <textarea id="html-editor" oninput="SaveHTML()"></textarea>
         </div>
+      </div>
     </div>
     
 
