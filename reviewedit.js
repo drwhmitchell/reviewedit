@@ -111,6 +111,12 @@ function SaveHTML() {
 
 function initializePage() {
   // Nothing to init yet
+
+}
+
+function ShowHeroImage() {
+  console.log("Show hero image")
+  document.getElementById('hero-image').src = document.getElementById('hero-image-link').value;
 }
 
 function SaveToLocalFile() {
