@@ -1,0 +1,131 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+	  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>DeepSleep Solutions Review Writer Tool</title>
+	  <!-- CSS for Bootstrap  -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <!-- CSS for ReviewEdit -->
+    <link href="./css/contentEdit.css" rel="stylesheet">   
+  </head>
+
+  <body onload="initializePage()">
+    <main>
+      <div class="jumbotron">
+        <h1 class="display-4">DeepSleep <b>Abstract</b> Editor</h1>
+      </div>
+
+
+
+      <!-- Controls for all content editors -->
+      <div class="row justify-content-between">   
+        <div class="col-md-4"> 
+          <div class="btn-group" role="group" aria-label="Content Editor Choice">
+            <input type="radio" class="btn-check" name="btnradio" id="mode-preview" autocomplete="off" onchange="ChangeModes(0)">
+            <label class="btn btn-outline-primary" for="mode-preview">Preview</label>
+            <input type="radio" class="btn-check" name="btnradio" id="mode-review" autocomplete="off" onchange="ChangeModes(1)">
+            <label class="btn btn-outline-primary" for="mode-review">Review</label>
+            <input type="radio" class="btn-check" name="btnradio" id="mode-abstract" autocomplete="off" checked onchange="ChangeModes(2)">
+            <label class="btn btn-outline-primary" for="mode-abstract">Abstract</label>
+            <input type="radio" class="btn-check" name="btnradio" id="mode-assets" autocomplete="off" onchange="ChangeModes(3)">
+            <label class="btn btn-outline-primary" for="mode-assets">Assets</label>
+          </div>
+        </div>
+        <div class="col-md-4"> 
+<!--            <label for="formFile" class="form-label">Load ...</label>   -->
+          <input class="form-control" type="file" id="file-input" onchange="FileInput();">
+          <button type="button" class="btn btn-outline-secondary"  onclick="TriggerFileInputEl()">Load</button>
+          <button type="button" class="btn btn-outline-secondary" onclick="SaveToLocalFile('.abs')">Save</button>
+          <button type="button" class="btn btn-outline-primary">Submit</button>
+        </div>
+      </div><hr>
+
+      <!-- Form fields for the Preview Editor -->
+      <div class="card card-body" id="review-editor-body">
+
+        <!-- Title Field -->
+        <div class="row">   
+          <div class="col-md-12"> 
+            <label for="content-title">Title</label> 
+            <input type="text" class="form-control" id="content-title" placeholder="Abstract Title">   
+          </div>  
+        </div>      
+        <!-- Author/Date/Category Fields -->
+        <div class="row">   
+          <div class="col-md-6">  
+            <label for="content-author">Author</label>   
+            <input type="text" class="form-control" id="content-author" placeholder="Author">    
+          </div>  
+        <div class="col-md-2">  
+          <label for="content=date">Date</label>   
+          <input type="date" class="form-control" id="content-date" name="content-date" placeholder="2022-10-31">   
+        </div>  
+        <div class="col-md-4">  
+          <label for="content-category">Category</label>   
+          <select class="form-select" id="content-category">   
+            <option selected>-none-</option>  
+            <option value="General">General</option>  
+            <option value="Deep Sleep">Deep Sleep</option>  
+            <option value="REM Sleep">REM Sleep</option>    
+            <option value="Insomnia">Insomnia</option>  
+            <option value="Efficiency">Efficiency</option>    
+            <option value="Accuracy">Accuracy</option>    
+          </select>   
+        </div>  
+        </div>  
+        <!-- Hero Image Link Field -->
+        <div class="row">
+          <div class="col-md-8">
+            <label for="content-hero-image-url">Hero Image Link</label>
+            <input type="text" class="form-control" id="content-hero-image-url" placeholder="Link to the hero image in DeepSleep Assets" oninput="ShowHeroImage()">
+          </div>
+          <div class="col-md-2">
+            <label for="content-hero-image-button"></label>
+            <br>
+            <button type="button" class="btn btn-light" id="content-hero-image-button" onclick="ShowHeroImage()">Load</button>
+          </div>
+        </div>
+        <!-- Hero Image Field -->
+        <div class="row">
+          <div class="col-md-8">
+            <label for="content-hero-image">Hero Image</label>
+            <img src="./img/default.jpg" class="img-thumbnail" alt="default image" width="200px" id="content-hero-image" >
+          </div>
+        </div>
+        <!-- Review Summary Field-->
+        <div class="row">
+          <div class="col-md-12">
+            <label for="content-article-url">Article Link</label>
+            <input type="text" class="form-control" id="content-article-url" placeholder="Link to the Article">
+          </div>
+        </div>
+      </div>
+
+      <div class="card card-body" id="content-editor-body">
+        <div class="row">
+          <label for="editor-container">Body</label>
+          <div id="editor-container"> </div>
+        </div>
+      </div>
+<!--
+<div id="editor-meta-container">
+    <div id="editor-container"></div>
+</div>
+-->
+
+    </main>
+
+
+    <!-- Include the Quill library -->
+    <script src="https://cdn.quilljs.com/1.0.0/quill.js"></script>
+    <!-- Include reviewEdit code -->
+    <script src="./js/contentEdit.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+
+  </body> 
+</html>

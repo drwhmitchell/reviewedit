@@ -1,0 +1,134 @@
+
+
+
+main {
+    margin: 2em;
+}
+
+label {
+    color: rgb(90, 3, 3); 
+    font-style: italic; 
+}
+
+input[type="file"] {
+    display: none;
+}
+
+h4 {
+    width:25%;
+}
+
+.bold-label {
+    font-family: Nunito, sans-serif;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.custom-file-upload {
+    border: 2px solid rgb(0, 0, 0);
+    display: inline-block;
+    background-color: #d3d3d3b4;
+    height: 2em;
+    padding-top: .15em;  
+    padding-bottom: .2em;
+
+    margin-top: 2.5em; 
+    margin-left:0.5em; 
+    margin-right:0.5em;
+    text-align: center;
+    width: 8em;
+    cursor: pointer;
+}
+
+.review-button {
+    margin-top: 2em; 
+    margin-left:0.5em; 
+    margin-right:0.5em;
+    width: 8em;
+    height: 2em;
+    background-color: #d3d3d3b4;
+}
+
+h1 {
+    text-align: center; 
+    padding: 0.5em 0 0.5em 0;
+}
+  
+hr {
+    border: 0;
+    clear:both;
+    display:block;
+    width: 100%;               
+    background-color:#5e5e5e;
+    height: 1px;
+    cursor: s-resize;;
+
+}
+
+#resize-widget {
+    height:2px; 
+    background-color:rgb(89, 92, 92); 
+}
+  
+a:link {
+    color: #068ab2;
+    text-decoration: underline;
+}
+
+#inputfile {
+    margin-top: 2em; 
+    margin-left:1em; 
+    margin-right:0em;
+}
+
+.control-container {
+    display: flex;  
+    align-items: center; 
+    justify-content: center;
+}
+
+.control-box {
+    margin-top: 2.5em; 
+    margin-left:5%; 
+    margin-right:5%;
+}
+
+.field-container {
+    margin-left: 5%; 
+    margin-right: 5%; 
+    margin-bottom: 0.5em;
+
+    display: flex; 
+    align-items: left; 
+    justify-content: left;
+}
+
+#asset-editor-body {
+    height: 75vh;
+}
+
+
+.review-body-container {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center;
+
+}
+
+#editor-meta-container {
+    width: 100%; 
+}
+
+#editor-container {
+    height: 40vh;
+}
+
+#html-editor {
+    width: 90%; 
+    height: 20vh;
+}
+
+#html-container {
+    width: 100%;
+}

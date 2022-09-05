@@ -17,13 +17,17 @@ var toolbarOptions = [
     ['clean']                                         // remove formatting button
   ];
 
-var quill = new Quill('#editor-container', {
-  modules: {
-    toolbar: toolbarOptions    // Snow includes toolbar by default
-  },
-  placeholder: 'Compose a new Product Review...',
-  theme: 'snow'
-});
+var quill;
+
+function InitializeQuill() {
+  quill = new Quill('#editor-container', {
+    modules: {
+      toolbar: toolbarOptions    // Snow includes toolbar by default
+    },
+    placeholder: 'Compose a new Product Review...',
+    theme: 'snow'
+  })
+}
 
 function SerializeReviewObject() {
   var reviewObj = new Object();
@@ -109,8 +113,42 @@ function SaveHTML() {
   quill.root.innerHTML = document.getElementById('html-editor').value;
 }
 
+function ChangeModes(mode) {
+  // Modes = 0 for Preview, 1 for Review, 2 for Abstract, 3 for Assets
+
+  const displayBlockFileName = ["preview.html", "reviewEdit.html", "abstract.html", "assets.html"];
+  LoadEditorHTML(displayBlockFileName[displayBlockFileName]);
+}
+
+function LoadEditorHTML(fileName) {
+  console.log("Creating Editor Block using file='" + fileName + "'");
+
+  document.getElementById("asset-editor-body").innerHTML='<object type="text/html" data="reviewEdit.html"></object>';
+}
+
+function ChangeRangeValue(textID, rangeID) {
+  console.log("ChangeRangeValue()");
+  document.getElementById(textID).value = document.getElementById(rangeID).value
+}
+
+function ChangeTextValue(textID, rangeID) {
+  console.log("ChangeTextValue()");
+  document.getElementById(rangeID).value = document.getElementById(textID).value;
+}
+
 function initializePage() {
-  // Nothing to init yet
+  // Force a mode change button press simulation to load the review editor
+//  ChangeModes(1);
+//  InitializeQuill();
+
+/* var assetEdEl = document.getElementById("asset-editor-body");
+  var content = document.createElement("html");
+  content.type = "text/html";
+  content.ATTRIBUTE_NODE
+  assetEdEl.appendChild("reviewEdit.html");
+*/
+
+
 
 }
 

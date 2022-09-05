@@ -1,0 +1,242 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+	  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>DeepSleep Solutions Review Writer Tool</title>
+	  <!-- CSS for Bootstrap  -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <!-- CSS for ReviewEdit -->
+    <link href="./css/contentEdit.css" rel="stylesheet">   
+  </head>
+
+  <body onload="initializePage()">
+    <main>
+      <div class="jumbotron">
+        <h1 class="display-4">DeepSleep <b>Review</b> Editor</h1>
+      </div>
+
+      <!-- Controls for all content editors -->
+      <div class="row justify-content-between">   
+        <div class="col-md-4"> 
+          <div class="btn-group" role="group" aria-label="Content Editor Choice">
+            <input type="radio" class="btn-check" name="btnradio" id="mode-preview" autocomplete="off"  onchange="ChangeModes(0)">
+            <label class="btn btn-outline-primary" for="mode-preview">Preview</label>
+            <input type="radio" class="btn-check" name="btnradio" id="mode-review" autocomplete="off" checked onchange="ChangeModes(1)">
+            <label class="btn btn-outline-primary" for="mode-review">Review</label>
+            <input type="radio" class="btn-check" name="btnradio" id="mode-abstract" autocomplete="off" onchange="ChangeModes(2)">
+            <label class="btn btn-outline-primary" for="mode-abstract">Abstract</label>
+            <input type="radio" class="btn-check" name="btnradio" id="mode-assets" autocomplete="off" onchange="ChangeModes(3)">
+            <label class="btn btn-outline-primary" for="mode-assets">Assets</label>
+          </div>
+        </div>
+        <div class="col-md-4"> 
+          <button type="button" class="btn btn-outline-secondary">Load</button>
+          <button type="button" class="btn btn-outline-secondary">Save</button>
+          <button type="button" class="btn btn-outline-primary">Submit</button>
+        </div>
+      </div><hr>
+
+      <!-- Form fields for the Preview Editor -->
+      <div class="card card-body" id="review-editor-body">
+
+        <!-- Title Field -->
+        <div class="row">   
+          <div class="col-md-12"> 
+            <label for="review-title">Title</label> 
+            <input type="text" class="form-control" id="review-title" placeholder="Review Title">   
+          </div>  
+        </div>      
+        <!-- Author/Date/Category Fields -->
+        <div class="row">   
+          <div class="col-md-6">  
+            <label for="review-author">Author</label>   
+            <input type="text" class="form-control" id="review-author" placeholder="Author">    
+          </div>  
+        <div class="col-md-2">  
+          <label for="review=date">Date</label>   
+          <input type="date" class="form-control" id="review-date" name="review-date" placeholder="2022-10-31">   
+        </div>  
+        <div class="col-md-4">  
+          <label for="category-select">Category</label>   
+          <select class="form-select" id="category-select">   
+            <option selected>-none-</option>  
+            <option value="Bedding">Bedding</option>  
+            <option value="Supplements">Supplements</option>  
+            <option value="Technology">Technology</option>    
+            <option value="Audio">Audio</option>  
+            <option value="Visual">Visual</option>    
+            <option value="Thermals">Thermals</option>    
+          </select>   
+        </div>  
+        </div>  
+        <!-- Hero Image Link Field -->
+        <div class="row">
+          <div class="col-md-8">
+            <label for="hero-image-link">Hero Image Link</label>
+            <input type="text" class="form-control" id="hero-image-link" placeholder="Link to the hero image in DeepSleep Assets" oninput="ShowHeroImage()">
+          </div>
+          <div class="col-md-2">
+            <label for="hero-image-button"></label>
+            <br>
+            <button type="button" class="btn btn-light" id="hero-image-button" onclick="ShowHeroImage()">Load</button>
+          </div>
+        </div>
+        <!-- Hero Image Field -->
+        <div class="row">
+          <div class="col-md-8">
+            <label for="hero-image">Hero Image</label>
+            <img src="default.jpg" class="img-thumbnail" alt="default image" id="hero-image" >
+          </div>
+        </div>
+        <!-- Review Summary Field-->
+        <div class="row">
+          <div class="col-md-12">
+            <label for="review-summary">Summary</label>
+            <textarea class="form-control" id="review-summary" rows="2" placeholder="Quick review summary..."></textarea>
+          </div>
+        </div>
+        <!-- Review Rating Field-->
+        <div class="form-group">
+          <label for="review-rating">Rating</label>
+          <textarea class="form-control" id="review-rating" rows="1" placeholder="Description of the rating and why..."></textarea>
+        </div>
+        <!-- Review Deep Efficacy Fields-->
+        <div class="row">
+          <div class="col-md-1">
+            <label class="form-check-label" for="deep-efficacy-check"></label><br>
+            <input class="form-check-input" type="checkbox" value="" id="deep-efficacy-check">
+          </div>
+          <div class="col-md-6">
+            <label for="deep-efficacy-range">Deep Sleep Efficacy (0-100%)</label>
+            <input class="form-range" id="deep-efficacy-range" type="range" min="0" max="100" value="50"  \
+             oninput="ChangeRangeValue('deep-efficacy-val', 'deep-efficacy-range');">
+          </div>
+          <div class="col-md-1">
+            <label for="deep-efficacy-val"></label>
+            <input type="text" class="form-control" id="deep-efficacy-val" value="50" style="height:1.75em;" oninput="ChangeTextValue('deep-efficacy-val', 'deep-efficacy-range');">  
+          </div>  
+        </div>
+        <!-- Review REM Efficacy Fields-->
+        <div class="row">
+          <div class="col-md-1">
+            <label class="form-check-label" for="rem-efficacy-check"></label><br>
+            <input class="form-check-input" type="checkbox" value="" id="rem-efficacy-check">
+          </div>
+          <div class="col-md-6">
+            <label for="rem-efficacy-range">REM Sleep Efficacy (0-100%)</label>
+            <input class="form-range" id="rem-efficacy-range" type="range" min="0" max="100" value="50"  \
+              oninput="ChangeRangeValue('rem-efficacy-val', 'rem-efficacy-range');">
+          </div>
+          <div class="col-md-1">
+            <label for="rem-efficacy-val"></label>
+            <input type="text" class="form-control" id="rem-efficacy-val" value="50" style="height:1.75em;" \
+              oninput="ChangeTextValue('rem-efficacy-val', 'rem-efficacy-range');">  
+          </div>  
+        </div>
+        <!-- Review Onset Efficacy Fields-->
+        <div class="row">
+          <div class="col-md-1">
+            <label class="form-check-label" for="onset-efficacy-check"></label><br>
+            <input class="form-check-input" type="checkbox" value="" id="onset-efficacy-check">
+          </div>
+          <div class="col-md-6">
+            <label for="onset-efficacy-range">Sleep Onset Efficacy (0-100%)</label>
+            <input class="form-range" id="onset-efficacy-range" type="range" min="0" max="100" value="50"  \
+              oninput="ChangeRangeValue('onset-efficacy-val', 'onset-efficacy-range');">
+          </div>
+          <div class="col-md-1">
+            <label for="onset-efficacy-val"></label>
+            <input type="text" class="form-control" id="onset-efficacy-val" value="50" style="height:1.75em;" \
+              oninput="ChangeTextValue('onset-efficacy-val', 'onset-efficacy-range');">  
+          </div>  
+        </div>
+        <!-- Review Wakefulness Efficacy Fields-->
+        <div class="row">
+          <div class="col-md-1">
+            <label class="form-check-label" for="wakefulness-efficacy-check"></label><br>
+            <input class="form-check-input" type="checkbox" value="" id="wakefulness-efficacy-check">
+          </div>
+          <div class="col-md-6">
+            <label for="wakefulness-efficacy-range">Sleep Wakefulness Efficacy (0-100%)</label>
+            <input class="form-range" id="onset-wakefulness-range" type="range" min="0" max="100" value="50"  \
+                oninput="ChangeRangeValue('wakefulness-efficacy-val', 'wakefulness-efficacy-range');">
+          </div>
+          <div class="col-md-1">
+            <label for="wakefulness-efficacy-val"></label>
+            <input type="text" class="form-control" id="wakefulness-efficacy-val" value="50" style="height:1.75em;" \
+                oninput="ChangeTextValue('wakefulness-efficacy-val', 'wakefulness-efficacy-range');">  
+          </div>  
+        </div>
+        <!-- Review Efficiency Efficacy Fields-->
+        <div class="row">
+          <div class="col-md-1">
+            <label class="form-check-label" for="efficiency-efficacy-check"></label><br>
+            <input class="form-check-input" type="checkbox" value="" id="efficiency-efficacy-check">
+          </div>
+          <div class="col-md-6">
+            <label for="efficiency-efficacy-range">Sleep Efficiency Efficacy (0-100%)</label>
+            <input class="form-range" id="efficiency-wakefulness-range" type="range" min="0" max="100" value="50"  \
+                oninput="ChangeRangeValue('efficiency-efficacy-val', 'efficiency-efficacy-range');">
+          </div>
+          <div class="col-md-1">
+            <label for="efficiency-efficacy-val"></label>
+            <input type="text" class="form-control" id="efficiency-efficacy-val" value="50" style="height:1.75em;" \
+                oninput="ChangeTextValue('efficiency-efficacy-val', 'efficiency-efficacy-range');">  
+          </div>  
+        </div>
+        <!-- Review Measurement Accuracy Fields-->
+        <div class="row">
+          <div class="col-md-1">
+            <label class="form-check-label" for="accuracy-efficacy-check"></label><br>
+            <input class="form-check-input" type="checkbox" value="" id="accuracy-efficacy-check">
+          </div>
+          <div class="col-md-6">
+            <label for="accuracy-efficacy-range">Measurement Accuracy Efficacy (0-100%)</label>
+            <input class="form-range" id="accuracy-efficacy-range" type="range" min="0" max="100" value="50"  \
+                oninput="ChangeRangeValue('accuracy-efficacy-val', 'accuracy-efficacy-range');">
+          </div>
+          <div class="col-md-1">
+            <label for="accuracy-efficacy-val"></label>
+            <input type="text" class="form-control" id="accuracy-efficacy-val" value="50" style="height:1.75em;" \
+                oninput="ChangeTextValue('accuracy-efficacy-val', 'accuracy-efficacy-range');">  
+          </div>  
+        </div>
+            
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label for="inputState">Vendor</label>
+                    <select id="inputState" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-8">
+                    <label for="inputCity">Link</label>
+                    <input type="text" class="form-control" id="inputCity">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="inputZip">Price</label>
+                    <input type="text" class="form-control" id="inputZip">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="editor-container">Body</label>
+                <div id="editor-container" oninput="ShowHTML()">
+                </div>
+            </div>
+            </div>
+      </main>
+
+    <!-- Include the Quill library -->
+    <script src="https://cdn.quilljs.com/1.0.0/quill.js"></script>
+    <!-- Include reviewEdit code -->
+    <script src="./js/contentEdit.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+
+  </body> 
+</html>

@@ -1,6 +1,13 @@
 
+
+
 main {
     margin: 2em;
+}
+
+label {
+    color: rgb(90, 3, 3); 
+    font-style: italic; 
 }
 
 input[type="file"] {
@@ -96,8 +103,8 @@ a:link {
     justify-content: left;
 }
 
-.review-container {
-
+#asset-editor-body {
+    height: 75vh;
 }
 
 
@@ -108,12 +115,13 @@ a:link {
     justify-content: center;
 
 }
+
 #editor-meta-container {
     width: 95%; 
 }
 
 #editor-container {
-    height: 50vh;
+    height: 20vh;
 }
 
 #html-editor {
