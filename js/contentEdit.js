@@ -151,8 +151,9 @@ function ShowAssetImages(assetDataArr) {
   for (i=0; i<assetDataArr.length; i++) {
     buf += "<img src='" + assetDataArr[i].url + "' width='200' height='200'>";    
   }
-  bug += "</div>";
+  buf += "</div>";
   document.getElementById('asset-editor-body').innerHTML = buf;  
+  console.log("COMPLETED DRAWING ASSETS!!!")
 }
 
 
