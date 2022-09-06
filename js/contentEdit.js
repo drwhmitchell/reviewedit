@@ -147,9 +147,14 @@ async function FillAssetGallery() {
 }
 
 function ShowAssetImages(assetDataArr) {
-  var buf = "<div>";
+  var buf = "<div class='container'>";
   for (i=0; i<assetDataArr.length; i++) {
-    buf += "<img src='" + assetDataArr[i].url + "' width='200' height='200'>";    
+    buf += "<div class='card'>";
+    buf += "<img src='" + assetDataArr[i].url + "' width='200' height='200'>";  
+    buf += "<div class='card-body'>";  
+    buf += "<h5 class='card-title'>" + assetDataArr[i].keywords + "</h5>";
+    buf += "</div>";  
+    buf += "</div>";  
   }
   buf += "</div>";
   document.getElementById('asset-editor-body').innerHTML = buf;  
