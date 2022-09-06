@@ -143,9 +143,17 @@ async function FillAssetGallery() {
   for (i=0; i<assetDataArr.length; i++) {
     console.log("KeyWord/URL=(" + assetDataArr[i].keywords + "," + assetDataArr[i].url + ")");
   }
+  ShowAssetImages(assetDataArr);
 }
 
-const DST = '9111bd55-2fd7-4520-4ff8-ddb2c7b733e9';  // Bearer Token
+function ShowAssetImages(assetDataArr) {
+  var buf = "";
+  for (i=0; i<assetDataArr.length; i++) {
+    buf += "<img src='" + assetDataArr[i].url + "' width='200' height='200'";    
+  }
+  document.getElementById('asset-editor-body').innerHTML = buf;  
+}
+
 
 async function FetchAssetData() {
   var dsData = null;  
