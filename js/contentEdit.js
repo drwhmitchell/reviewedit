@@ -147,7 +147,7 @@ async function FillAssetGallery() {
 }
 
 function ShowAssetImages(assetDataArr) {
-  var buf = "<div class='card-group'>";
+  var buf = "<div class='card-group m-1'>";
   for (i=0; i<assetDataArr.length; i++) {
     buf += "<div class='card text-center' style='width: 18rem;'>";
     buf += "<img src='" + assetDataArr[i].url + "' width='200' height='200'>";  
