@@ -149,10 +149,11 @@ async function FillAssetGallery() {
 function ShowAssetImages(assetDataArr) {
   var buf = "<div class='container'>";
   for (i=0; i<assetDataArr.length; i++) {
-    buf += "<div class='card'>";
+    buf += "<div class='card' style='width: 18rem;'>";
     buf += "<img src='" + assetDataArr[i].url + "' width='200' height='200'>";  
     buf += "<div class='card-body'>";  
     buf += "<h5 class='card-title'>" + assetDataArr[i].keywords + "</h5>";
+    buf += "<h6 class='card-subtitle mb-2 text-muted'>" + assetDataArr[i].url + "</h6>";
     buf += "</div>";  
     buf += "</div>";  
   }
