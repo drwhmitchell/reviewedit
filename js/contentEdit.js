@@ -112,8 +112,8 @@ function ChangeTextValue(textID, rangeID) {
 function initializePage(mode) {
   // Asset Viewer Prefill
   if (mode == 3) {
-//    FillAssetGallery();
-    TestFill();
+    FillAssetGallery();
+//    TestFill();
 }
 }
 
@@ -152,10 +152,6 @@ async function FetchAssetData() {
   console.log("fetchAssetData()");
 
   const res = await fetch('https://sleepnetnodejs.uw.r.appspot.com/api/productPhotoURL/all', {
-    mode: 'no-cors', // no-cors, *cors, same-origin
- //   headers: {
- //     Authorization: 'Bearer ' + DST,
- //   }
     })
     .then (res => res.json())
     .then(dataBack =>  { 
