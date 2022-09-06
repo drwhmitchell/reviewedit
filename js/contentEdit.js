@@ -67,7 +67,7 @@ async function SubmitAsset() {
 
   fetch("https://sleepnetnodejs.uw.r.appspot.com/api/uploadProductPhoto", {   
     method: "POST",
-    mode: 'no-cors', // no-cors, *cors, same-origin
+//    mode: 'no-cors', // no-cors, *cors, same-origin
     body: JSON.stringify({
         file: fn,
         keywords: title,
