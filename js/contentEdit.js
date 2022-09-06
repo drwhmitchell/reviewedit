@@ -57,6 +57,28 @@ console.log("InstantiateReviewObject")
 
 }
 
+async function SubmitAsset() {
+  // Make a POST call to  https://sleepnetnodejs.uw.r.appspot.com/api/uploadProductPhoto
+  // With the data 
+  //  {file: File; keywords: string }
+
+  var fn = document.getElementById("asset-upload-image").src;
+  var title = document.getElementById("asset-name").value;
+
+  fetch("https://sleepnetnodejs.uw.r.appspot.com/api/uploadProductPhoto", {   
+    method: "POST",
+    body: JSON.stringify({
+        file: fn,
+        keywords: title,
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"
+    }
+  })
+  .then(response => response.json())
+  // Displaying results to console
+  .then(json => console.log(json));
+}
 
 // Submit review to the server
 function SubmitReview() {
@@ -229,6 +251,21 @@ else {
 document.getElementById('showHTML').value = checkValue;
 }
 
+// Grab and display asset locally in prep to upload to server
+function AssetUpload() {
+  console.log("Entered AssetUpload...");   
+  var fn = document.getElementById('file-input').files[0];
+             
+  var fr=new FileReader();
+  fr.onload=function() {
+    if (fr.result) {
+      // Now load the image
+      document.getElementById("asset-upload-image").src = fr.result;
+     }
+  }           
+  // Start reading file asynchronously
+  fr.readAsDataURL(fn);
+}
 
 function FileInput() {
 console.log("Entered FileInput...");   

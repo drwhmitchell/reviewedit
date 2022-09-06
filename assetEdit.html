@@ -37,12 +37,24 @@
           </div>
         </div>
         <div class="col-md-4"> 
-          <input class="form-control" type="file" id="file-input" onchange="FileInput();">
-          <button type="button" class="btn btn-outline-secondary"  onclick="TriggerFileInputEl()">Upload...</button>
+          <input class="form-control" type="file" id="file-input" onchange="AssetUpload();">
         </div>
       </div><hr>
 
       <!-- Form fields for the Preview Editor -->
+      <div class="container" id="asset-uploader-body">
+        <div class='card text-center' style='width: 18rem;'>
+          <img src='./img/default.jpg' id='asset-upload-image'> 
+          <div class='card-body'>  
+            <h5 class='card-title'>
+              <input type="text" class="form-control" id="asset-name" placeholder="Asset Title">
+            </h5>
+          </div>
+        </div>
+        <button type="button" class="btn btn-outline-secondary mt-2"  onclick="TriggerFileInputEl()">Upload Asset...</button>
+        <button type="button" class="btn btn-outline-primary mt-2"  onclick="SubmitAsset()">Submit Asset...</button>
+      </div>
+      <hr>
       <div class="container" id="asset-editor-body">
       </div>
 
