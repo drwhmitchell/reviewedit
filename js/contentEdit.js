@@ -112,9 +112,29 @@ function ChangeTextValue(textID, rangeID) {
 function initializePage(mode) {
   // Asset Viewer Prefill
   if (mode == 3) {
-    FillAssetGallery();
-  }
+//    FillAssetGallery();
+    TestFill();
 }
+}
+
+async function TestFill(token, model, dayOffset) {
+  var dsData = null;  
+  console.log("fetchHypnoData()");
+
+  const res = await fetch('https://sleepnetnodejs.uw.r.appspot.com/api/productPhotoURL/all', {
+  })
+    .then (res => res.json())
+    .then(dataBack =>  { 
+       console.log("TestFill=" + JSON.stringify(dataBack));
+                          if (dataBack) {
+                            dsData = dataBack;
+                          }
+                       });
+
+    return(dsData);
+}
+
+
 
 // Call Server API to get static images
 async function FillAssetGallery() {
@@ -125,12 +145,18 @@ async function FillAssetGallery() {
   }
 }
 
+const DST = '9111bd55-2fd7-4520-4ff8-ddb2c7b733e9';  // Bearer Token
+
 async function FetchAssetData() {
   var dsData = null;  
   console.log("fetchAssetData()");
 
   const res = await fetch('https://sleepnetnodejs.uw.r.appspot.com/api/productPhotoURL/all', {
-  })
+    mode: 'no-cors', // no-cors, *cors, same-origin
+ //   headers: {
+ //     Authorization: 'Bearer ' + DST,
+ //   }
+    })
     .then (res => res.json())
     .then(dataBack =>  { 
        console.log("AssetData:" + JSON.stringify(dataBack));
@@ -140,6 +166,7 @@ async function FetchAssetData() {
                        });
     return(dsData);
 }
+
 
 
 // Simulate a press on the file upload element
