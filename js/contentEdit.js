@@ -147,10 +147,11 @@ async function FillAssetGallery() {
 }
 
 function ShowAssetImages(assetDataArr) {
-  var buf = "";
+  var buf = "<div>";
   for (i=0; i<assetDataArr.length; i++) {
-    buf += "<img src='" + assetDataArr[i].url + "' width='200' height='200'";    
+    buf += "<img src='" + assetDataArr[i].url + "' width='200' height='200'>";    
   }
+  bug += "</div>";
   document.getElementById('asset-editor-body').innerHTML = buf;  
 }
 
