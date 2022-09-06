@@ -67,12 +67,13 @@ async function SubmitAsset() {
 
   fetch("https://sleepnetnodejs.uw.r.appspot.com/api/uploadProductPhoto", {   
     method: "POST",
+    mode: 'no-cors', // no-cors, *cors, same-origin
     body: JSON.stringify({
         file: fn,
         keywords: title,
     }),
     headers: {
-      "Content-type": "application/json; charset=UTF-8"
+      "Content-type": "application/json"
     }
   })
   .then(response => response.json())
