@@ -27,6 +27,10 @@ theme: 'snow'
 
 */
 
+const DUMMY_ASSETS = 0;
+const dummyAssetData = '[{"id":1,"uuid":"762173b6-481f-4d32-83c7-802f289f8215","url":"https://storage.googleapis.com/sleepnetnodejs.appspot.com/762173b6-481f-4d32-83c7-802f289f8215.png","keywords":"test1","creationDate":"2022-08-28T07:33:53.306Z","userID":4},{"id":2,"uuid":"f15bf62c-a90e-4a00-82ea-3704aafc7b65","url":"https://storage.googleapis.com/sleepnetnodejs.appspot.com/f15bf62c-a90e-4a00-82ea-3704aafc7b65.png","keywords":"test12","creationDate":"2022-08-28T07:56:55.535Z","userID":4},{"id":3,"uuid":"6e6dcacc-9488-42f5-ae67-35db8beca1de","url":"https://storage.googleapis.com/sleepnetnodejs.appspot.com/6e6dcacc-9488-42f5-ae67-35db8beca1de.png","keywords":"fdsfsd","creationDate":"2022-08-28T07:58:22.115Z","userID":4},{"id":4,"uuid":"83df5429-be4a-4cf5-8e34-15ae9f4dd595","url":"https://storage.googleapis.com/sleepnetnodejs.appspot.com/83df5429-be4a-4cf5-8e34-15ae9f4dd595.jpg","keywords":"Zinus","creationDate":"2022-09-05T05:13:36.831Z","userID":4},{"id":5,"uuid":"d35d52b9-dd32-4307-a28e-4e8969c337c5","url":"https://storage.googleapis.com/sleepnetnodejs.appspot.com/d35d52b9-dd32-4307-a28e-4e8969c337c5.png","keywords":"test hello testin12","creationDate":"2022-09-06T19:15:29.823Z","userID":4}]';
+
+/*
 function SerializeAbstractObject() {
   var contentObj = new Object();
 
@@ -56,31 +60,38 @@ console.log("InstantiateReviewObject")
   quill.root.innerHTML = contentObj.body;
 
 }
+*/
 
 async function SubmitAsset() {
-  // Make a POST call to  https://sleepnetnodejs.uw.r.appspot.com/api/uploadProductPhoto
-  // With the data 
-  //  {file: File; keywords: string }
+  var dsData = null;  
+  console.log("SubmitAsset()");
 
-  var fn = document.getElementById("asset-upload-image").src;
-  var title = document.getElementById("asset-name").value;
+//  const body = {file: document.getElementById("asset-upload-image").src, keywords : document.getElementById("asset-name").value};
 
-  fetch("https://sleepnetnodejs.uw.r.appspot.com/api/uploadProductPhoto", {   
+  let data = new FormData();
+  data.append('title', document.getElementById("asset-title").value);
+  data.append('keywords', document.getElementById("asset-keywords").value);
+  data.append('altText', document.getElementById("asset-altText").value);
+  data.append('file', document.getElementById('file-input').files[0]);
+console.log("SubmitAsset() with FileName='" + document.getElementById('file-input').files[0].name + "'");
+
+
+  const res = await fetch('https://sleepnetnodejs.uw.r.appspot.com/api/uploadProductPhoto', {
     method: "POST",
-//    mode: 'no-cors', // no-cors, *cors, same-origin
-    body: JSON.stringify({
-        file: fn,
-        keywords: title,
-    }),
-    headers: {
-      "Content-type": "application/json"
-    }
-  })
-  .then(response => response.json())
-  // Displaying results to console
-  .then(json => console.log(json));
+    body: data
+    })
+    .then (res => res.json())
+    .then(dataBack =>  { 
+       console.log("Data Back from POST:" + dataBack);
+       // Now refresh the Assets displayed
+       FillAssetGallery();
+                       });
 }
 
+
+
+
+/*
 // Submit review to the server
 function SubmitReview() {
 
@@ -105,6 +116,7 @@ function SaveHTML() {
   console.log("SaveHTML");
   quill.root.innerHTML = document.getElementById('html-editor').value;
 }
+*/
 
 function ChangeModes(mode) {
   // Modes = 0 for Preview, 1 for Review, 2 for Abstract, 3 for Assets
@@ -116,6 +128,7 @@ function ChangeModes(mode) {
 
 }
 
+/*
 function LoadEditorHTML(fileName) {
   console.log("Creating Editor Block using file='" + fileName + "'");
 
@@ -131,15 +144,29 @@ function ChangeTextValue(textID, rangeID) {
   console.log("ChangeTextValue()");
   document.getElementById(rangeID).value = document.getElementById(textID).value;
 }
+*/
 
 function initializePage(mode) {
   // Asset Viewer Prefill
   if (mode == 3) {
     FillAssetGallery();
-//    TestFill();
-}
+    HideSubmitButton();
+  }
 }
 
+function HideSubmitButton() {
+  document.getElementById('submit-button').style.visibility = 'hidden';
+}
+
+function ShowSubmitButton() {
+  document.getElementById('submit-button').style.visibility = 'visible';
+}
+
+function FillAssetName(fn) {
+  document.getElementById('asset-title').value = fn.split(".")[0];
+}
+
+/*
 async function TestFill(token, model, dayOffset) {
   var dsData = null;  
   console.log("fetchHypnoData()");
@@ -156,29 +183,55 @@ async function TestFill(token, model, dayOffset) {
 
     return(dsData);
 }
-
+*/
 
 
 // Call Server API to get static images
 async function FillAssetGallery() {
   // Call https://sleepnetnodejs.uw.r.appspot.com/api/productPhotoURL/all
-  const assetDataArr = await FetchAssetData();
-  for (i=0; i<assetDataArr.length; i++) {
-    console.log("KeyWord/URL=(" + assetDataArr[i].keywords + "," + assetDataArr[i].url + ")");
+
+  if (DUMMY_ASSETS) {
+console.log("DUMMY IMAGE ASSETS!!!!!!");
+    ShowAssetImages(JSON.parse(dummyAssetData));
+  } else {
+console.log("LIVE IMAGE ASSETS!!!!!!");
+    const assetDataArr = await FetchAssetData();
   }
-  ShowAssetImages(assetDataArr);
 }
 
 function ShowAssetImages(assetDataArr) {
-  var buf = "<div class='card-group'>";
+
+
+ // var buf ='<div class="row row-cols-3 row-cols-md-2 g-4">';
+var buf = '<div class="row row-cols-4 row-cols-md-2 g-4">';
+
   for (i=0; i<assetDataArr.length; i++) {
-    buf += "<div class='card text-center' style='width: 18rem;'>";
-    buf += "<img src='" + assetDataArr[i].url + ">";  
+//    buf += '<div class="col">';
+ //   buf += '<div class="card">';
+
+ /*
+    buf += '<div class="col-auto mb-3">';
+    buf += '<div class="card" style="width: 30rem; height: 20rem";>';
+    buf += '<img class="card-img-top" style="text-align: center; width: 10rem; height: 14rem" src="' + assetDataArr[i].url + '" alt="Card Image" style="width:100">';
+    buf = buf + '<div class="card-body style="width: 11rem; height: 10rem">';
+    buf += "<h5 class='card-title'>" + assetDataArr[i].title + "</h5>";
+    buf += "<h6 class='card-subtitle'>" + assetDataArr[i].altText + "</h6>";
+    buf += "<h6 class='card-subtitle'>" + assetDataArr[i].keywords + "</h6>";
+    buf += "<h6 class='card-subtitle text-muted'>" + assetDataArr[i].url + "</h6>";
+    buf += + '</div></div></div>';
+*/
+    buf += '<div class="card" style="width: 30rem; height: 20rem"; margin-x>';
+    buf += '<img class="card-img-top" style="text-align: center; width: 10rem; height: 14rem" src="' + assetDataArr[i].url + '" alt="Card Image" style="width:100">';
     buf += "<div class='card-body'>";  
-    buf += "<h5 class='card-title'>" + assetDataArr[i].keywords + "</h5>";
-    buf += "<h6 class='card-subtitle mb-2 text-muted'>" + assetDataArr[i].url + "</h6>";
+    buf += "<h5 class='card-title' style='tex-align: center'>" + assetDataArr[i].title + "</h5>";
+    buf += "<h6 class='card-subtitle'>" + assetDataArr[i].altText + "</h6>";
+    buf += "<h6 class='card-subtitle'>" + assetDataArr[i].keywords + "</h6>";
+    buf += "<h6 class='card-subtitle text-muted'>" + assetDataArr[i].url + "</h6>";
     buf += "</div>";  
     buf += "</div>";  
+
+
+ //   buf += "</div>";  
   }
   buf += "</div>";
   document.getElementById('asset-editor-body').innerHTML = buf;  
@@ -196,7 +249,11 @@ async function FetchAssetData() {
     .then(dataBack =>  { 
        console.log("AssetData:" + JSON.stringify(dataBack));
                           if (dataBack) {
-                            dsData = dataBack;
+                            assetDataArr = dataBack;
+                            for (i=0; i<assetDataArr.length; i++) {
+                              console.log("KeyWord/URL=(" + assetDataArr[i].keywords + "," + assetDataArr[i].url + ")");
+                            }
+                            ShowAssetImages(assetDataArr);
                           }
                        });
     return(dsData);
@@ -212,6 +269,7 @@ function TriggerFileInputEl() {
 
 }
 
+/*
 function ShowHeroImage() {
   console.log("Show hero image")
   document.getElementById('content-hero-image').src = document.getElementById('content-hero-image-url').value;
@@ -229,8 +287,8 @@ console.log("Saving to local file");
   a.click();
   a.remove();
 }
-
-
+*/
+/*
 function ShowHTMLCheck() {
 var checkValue = document.getElementById('showHTML').value;
 console.log("Check value=" + checkValue);
@@ -251,23 +309,25 @@ else {
 }
 document.getElementById('showHTML').value = checkValue;
 }
+*/
 
 // Grab and display asset locally in prep to upload to server
 function AssetUpload() {
   console.log("Entered AssetUpload...");   
   var fn = document.getElementById('file-input').files[0];
-             
   var fr=new FileReader();
   fr.onload=function() {
     if (fr.result) {
       // Now load the image
       document.getElementById("asset-upload-image").src = fr.result;
+      FillAssetName(fn.name);
+      ShowSubmitButton();
      }
   }           
   // Start reading file asynchronously
   fr.readAsDataURL(fn);
 }
-
+/*
 function FileInput() {
 console.log("Entered FileInput...");   
 var fn = document.getElementById('file-input').files[0];
@@ -292,3 +352,5 @@ fr.readAsText(fn);
 function ResizeReviewWindow() {
   console.log("Resizing Review Window...")
 }
+
+*/
